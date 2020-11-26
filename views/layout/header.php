@@ -6,7 +6,7 @@
                         <title>
                               Tienda de camisetas
                         </title>
-                        <link href="assets/css/estilos.css" rel="stylesheet">
+                        <link href="<?=base_url?>assets/css/estilos.css" rel="stylesheet">
                         </link>
                   </meta>
             </meta>
@@ -16,7 +16,7 @@
                   <!-- cabecera -->
                   <header id="header">
                         <div id="logo">
-                              <img alt="comiseta" class="logo" src="assets/img/logo.jpg">
+                              <img alt="comiseta" class="logo" src="<?=base_url?>assets/img/logo.jpg">
                                     <a href="index.php">
                                           Tienda de camisetas
                                     </a>
@@ -44,4 +44,3 @@
                         </ul>
                   </nav>
                   <div id="content">
-                        
