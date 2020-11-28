@@ -24,6 +24,7 @@
                         </div>
                   </header>
                   <!-- menu -->
+                  <?php $listarCategorias = Utils::showCategorias();?>
                   <nav id="menu">
                         <ul>
                               <li>
@@ -31,16 +32,13 @@
                                           Inicio
                                     </a>
                               </li>
+                              <?php while ($cat = $listarCategorias->fetch_object()): ?>
                               <li>
                                     <a href="#">
-                                          categorias
+                                       <?=$cat->nombre;?>
                                     </a>
                               </li>
-                              <li>
-                                    <a href="#">
-                                          productos
-                                    </a>
-                              </li>
+                             <?php endwhile;?>
                         </ul>
                   </nav>
                   <div id="content">

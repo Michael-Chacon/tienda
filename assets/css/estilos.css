@@ -8,6 +8,23 @@
 body {
       background: url(../img/bg.png);
 }
+table {
+      text-align: center;
+      width: 100%;
+      border: 1px solid #555;
+}
+td {
+      border-top: 1px solid #ccc;
+      padding: 2px;
+}
+.alert-green {
+      color: #18FC07;
+      text-align: center;
+}
+.alert-red {
+      color: red;
+      text-align: center;
+}
 a {
       color: #01B1EA;
 }
@@ -164,6 +181,11 @@ input[type="button"], input[type="submit"], button, .button {
       background: #1C8D3F;
       color: white !important;
       text-decoration: none;
+}
+.button-small {
+      width: 120px;
+      text-align: center;
+      margin-bottom: 20px;
 }
 label, input[type="button"], input[type="submit"], button {
       display: block;
