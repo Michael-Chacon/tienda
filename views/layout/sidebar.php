@@ -1,4 +1,3 @@
-
         <!-- barra lateral -->
         <aside id="lateral">
             <div id="login" class="block-aside">
@@ -25,13 +24,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            Gestionar pedidos
+                        <a href="<?=base_url?>Producto/gestion">
+                           Gestionar produtos
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                           Gestionar produtos
+                            Gestionar pedidos
                         </a>
                     </li>
                 <?php endif;?>

@@ -1,4 +1,7 @@
 <?php
+ob_start();
+?>
+<?php
 session_start();
 require_once 'autoload.php';
 require_once 'config/database.php';
@@ -6,6 +9,7 @@ require_once 'config/parametros.php';
 require_once 'helpers/utils.php';
 require_once 'views/layout/header.php';
 require_once 'views/layout/sidebar.php';
+
 //conexion con la base  de datos
 $db = Database::conectar();
 function show_error()
@@ -40,3 +44,6 @@ if (class_exists($nombre_controlador)) {
 } else {
           show_error();
 }
+?>
+<?php
+ob_end_flush();
