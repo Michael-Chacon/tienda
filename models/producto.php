@@ -2,6 +2,7 @@
 
 class Producto
 {
+          private $id;
           private $categoria_id;
           private $nombre;
           private $descripcion;
@@ -19,6 +20,11 @@ class Producto
           }
 
           //motodos get
+          public function getId()
+          {
+                    return $this->id;
+          }
+
           public function getCategoriaId()
           {
                     return $this->categoria_id;
@@ -60,6 +66,10 @@ class Producto
           }
 
           //metodos set
+          public function setId($id)
+          {
+                    $this->id = $this->db->real_escape_string($id);
+          }
 
           public function setCategoriaId($categoria_id)
           {
@@ -107,9 +117,32 @@ class Producto
                     return $productos;
           }
 
+          public function getOnly()
+          {
+                    $producto = $this->db->query("SELECT * FROM productos WHERE id = {$this->getId()};");
+                    return $producto->fetch_object();
+          }
+
           public function save()
           {
-                    $sql = "INSERT INTO productos VALUES(null, {$this->getCategoriaId()}, '{$this->getNombre()}', '{$this->getDescripcion()}', {$this->getPrecio()}, {$this->getStock()}, null, CURDATE(), null);";
+                    $sql = "INSERT INTO productos VALUES(null, {$this->getCategoriaId()}, '{$this->getNombre()}', '{$this->getDescripcion()}', {$this->getPrecio()}, {$this->getStock()}, null, CURDATE(), '{$this->getImagen()}');";
+
+                    $insertar = $this->db->query($sql);
+
+                    $resultado = false;
+                    if ($insertar) {
+                              $resultado = $insertar;
+                    }
+                    return $resultado;
+          }
+          public function editar()
+          {
+                    $sql = "UPDATE productos SET categoria_id =  {$this->getCategoriaId()}, nombre = '{$this->getNombre()}',  descripcion = '{$this->getDescripcion()}',  precio ={$this->getPrecio()},  stock = {$this->getStock()}";
+
+                    if ($this->getImagen() != null) {
+                              $sql .= ", imagen = '{$this->getImagen()}'";
+                    }
+                    $sql .= " WHERE id = {$this->getId()};";
 
                     $insertar = $this->db->query($sql);
 
@@ -120,4 +153,16 @@ class Producto
                     return $resultado;
           }
 
-}
+          public function delete()
+          {
+                    $sql      = "DELETE FROM productos WHERE id = {$this->id};";
+                    $eliminar = $this->db->query($sql);
+
+                    $resultado = false;
+                    if ($eliminar) {
+                              $resultado = $eliminar;
+                    }
+                    return $resultado;
+          }
+
+} //final de  la clase

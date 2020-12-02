@@ -39,8 +39,30 @@ class ProductoController
                                         $producto->setDescripcion($_POST{'descripcion'});
                                         $producto->setPrecio($_POST{'precio'});
                                         $producto->setStock($_POST{'stock'});
-                                        $producto->setImagen($_POST{'imagen'});
-                                        $save = $producto->save();
+
+                                        //guardar imagenes
+                                        if (isset($_FILES['imagen'])) {
+                                                  $file     = $_FILES['imagen'];
+                                                  $filename = $file['name'];
+                                                  $mimetype = $file['type'];
+                                                  if ($mimetype == "image/jpg" || $mimetype == "image/jpeg" || $mimetype == "image/png" || $mimetype == "image/gif") {
+
+                                                            if (!is_dir('uploads/image/')) {
+                                                                      mkdir('uploads/image/', 0777, true);
+                                                            }
+                                                            move_uploaded_file($file['tmp_name'], 'uploads/image/' . $filename);
+                                                            $producto->setImagen($filename);
+                                                  }
+                                        }
+                                        if (isset($_GET['id'])) {
+                                                  $id = $_GET['id'];
+                                                  $producto->setId($id);
+                                                  $save = $producto->editar();
+                                                  // var_dump($save);
+                                                  // die();
+                                        } else {
+                                                  $save = $producto->save();
+                                        }
 
                                         if ($save) {
                                                   $_SESSION['producto'] = 'completado';
@@ -57,5 +79,41 @@ class ProductoController
                     // var_dump($_SESSION['producto']);
                     // die();
                     header("Location:" . base_url . "Producto/gestion");
+          }
+
+          public function editar()
+          {
+                    Utils::isAdmin();
+                    if (isset($_GET['id'])) {
+                              $edit     = true;
+                              $id       = $_GET['id'];
+                              $producto = new Producto();
+                              $producto->setId($id);
+                              $pro = $producto->getOnly();
+
+                              require_once 'views/producto/crear.php';
+                    } else {
+                              header('Location' . base_url . 'Producto/gestion');
+                    }
+          }
+
+          public function eliminar()
+          {
+                    Utils::isAdmin();
+                    if (isset($_GET['id'])) {
+                              $productoDl = new Producto();
+                              $productoDl->setId($_GET['id']);
+                              $borrado = $productoDl->delete();
+                              if ($borrado) {
+                                        $_SESSION['borrado'] = 'exito';
+
+                              } else {
+                                        $_SESSION['borrado'] = 'fallido';
+                              }
+
+                    } else {
+                              $_SESSION['borrado'] = 'fallido';
+                    }
+                    header('Location:' . base_url . 'Producto/gestion');
           }
 } //fin de la clase

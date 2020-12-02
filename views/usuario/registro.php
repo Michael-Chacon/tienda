@@ -2,7 +2,7 @@
 <?php
 
 if (isset($_SESSION['register']) && $_SESSION['register'] == 'completado'): ?>
-	<strong class="alert-green">Re a generado el registro correctamente</strong>
+	<strong class="alert-green">Se a generado el registro correctamente</strong>
 	<?php elseif (isset($_SESSION['register']) && $_SESSION['register'] == 'fallo'): ?>
 		<strong class="alert-red">Registro fallido, intriduce bien los datos</strong>
 	<?php endif;?>
