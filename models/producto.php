@@ -123,6 +123,13 @@ class Producto
                     return $producto->fetch_object();
           }
 
+          public function getRandom($limit)
+          {
+                    $productos = $this->db->query("SELECT *  FROM   productos ORDER BY RAND() LIMIT $limit;");
+
+                    return $productos;
+          }
+
           public function save()
           {
                     $sql = "INSERT INTO productos VALUES(null, {$this->getCategoriaId()}, '{$this->getNombre()}', '{$this->getDescripcion()}', {$this->getPrecio()}, {$this->getStock()}, null, CURDATE(), '{$this->getImagen()}');";
@@ -135,6 +142,7 @@ class Producto
                     }
                     return $resultado;
           }
+
           public function editar()
           {
                     $sql = "UPDATE productos SET categoria_id =  {$this->getCategoriaId()}, nombre = '{$this->getNombre()}',  descripcion = '{$this->getDescripcion()}',  precio ={$this->getPrecio()},  stock = {$this->getStock()}";
@@ -163,6 +171,12 @@ class Producto
                               $resultado = $eliminar;
                     }
                     return $resultado;
+          }
+
+          public function ver()
+          {
+                    $productos = $this->db->query("SELECT *  FROM productos WHERE categoria_id = {$this->getCategoriaId()};");
+                    return $productos;
           }
 
 } //final de  la clase

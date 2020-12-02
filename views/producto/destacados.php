@@ -1,30 +1,12 @@
-
-
-            <h1>Camisetas caras y feas </h1>
+<h1>Algunos de nuestros productos</h1>
+<?php while ($pro = $producto->fetch_object()): ?>
             <div class="product">
-                    <img src="assets/img/logo.jpg" alt="">
-                    <h4>camiseta azul cuello tipo neru</h4>
-                    <p>$30.000</p>
-                    <a href="#" class="button">comprar</a>
+                <a href="<?=base_url?>Producto/ver&id=<?=$pro->id?>">
+                    <img src="<?=base_url?>uploads/image/<?=$pro->imagen?>" alt="" class="image">
+                    <h4><?=$pro->nombre?></h4>
+                    </a>
+                    <p>$<?=$pro->precio?></p>
+                    <a href="<?=base_url?>Carrito/add&id=<?=$pro->id?>" class="button">comprar</a>
             </div>
-            <div class="product">
-                    <img src="assets/img/logo.jpg" alt="">
-                    <h4>camiseta azul cuello tipo neru</h4>
-                    <p>$30.000</p>
-                    <a href="#" class="button">comprar</a>
-            </div>
-
-            <div class="product">
-                    <img src="assets/img/logo.jpg" alt="">
-                    <h4>camiseta azul cuello tipo neru</h4>
-                    <p>$30.000</p>
-                    <a href="#" class="button">comprar</a>
-            </div>
-
-            <div class="product">
-                    <img src="assets/img/logo.jpg" alt="">
-                    <h4>camiseta azul cuello tipo neru</h4>
-                    <p>$30.000</p>
-                    <a href="#" class="button">comprar</a>
-            </div>
+          <?php endwhile;?>
         </div>

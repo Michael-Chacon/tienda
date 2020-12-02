@@ -4,9 +4,23 @@ class ProductoController
 {
           public function index()
           {
+                    $productos = new Producto();
+                    $producto  = $productos->getRandom(6);
 
                     require_once 'views/producto/destacados.php';
           }
+          public function ver()
+          {
+                    if (isset($_GET['id'])) {
+                              $id = $_GET['id'];
+
+                              $producto = new Producto();
+                              $producto->setId($id);
+                              $pro = $producto->getOnly();
+                              require_once 'views/producto/ver.php';
+                    }
+          }
+
           public function gestion()
           {
                     Utils::isAdmin();

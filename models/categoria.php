@@ -2,12 +2,18 @@
 
 class Categoria
 {
+          private $id;
           public $nombre;
           public $db;
 
           public function __construct()
           {
                     $this->db = Database::conectar();
+          }
+
+          public function getId()
+          {
+                    return $this->id;
           }
 
           public function getNombre()
@@ -18,6 +24,11 @@ class Categoria
           public function setNombre($nombre)
           {
                     $this->nombre = $this->db->real_escape_string($nombre);
+          }
+
+          public function setId($id)
+          {
+                    $this->id = $this->db->real_escape_string($id);
           }
 
           public function getAll()
@@ -36,5 +47,11 @@ class Categoria
                               $result = true;
                     }
                     return $result;
+          }
+
+          public function categoria()
+          {
+                    $categoria = $this->db->query("SELECT *  FROM categorias WHERE id = {$this->getId()}");
+                    return $categoria->fetch_object();
           }
 } //fin de la clase

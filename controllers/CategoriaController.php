@@ -1,5 +1,6 @@
 <?php
 require_once 'models/categoria.php';
+require_once 'models/producto.php';
 class CategoriaController
 {
           public function index()
@@ -30,4 +31,18 @@ class CategoriaController
                     header("Location: " . base_url . "Categoria/index");
 
           }
-}
+          public function ver()
+          {
+                    if (isset($_GET['id'])) {
+                              $id        = $_GET['id'];
+                              $categoria = new Categoria();
+                              $categoria->setId($id);
+                              $cat = $categoria->categoria();
+
+                              $producto = new Producto();
+                              $producto->setCategoriaId($id);
+                              $productos = $producto->ver();
+                    }
+                    require_once 'views/categoria/ver.php';
+          }
+} //fin de la clase
