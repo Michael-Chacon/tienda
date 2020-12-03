@@ -5,8 +5,8 @@ class CarritoController
           public function index()
           {
 
-                    var_dump($_SESSION['carrito']);
-                    echo 'contriolador carrito, accion index';
+                    $carrito = $_SESSION['carrito'];
+                    require_once 'views/carrito/index.php';
           }
 
           public function add()
@@ -44,6 +44,7 @@ class CarritoController
                     }
                     header('Location: ' . base_url . 'Carrito/index');
           }
+
           public function delete_all()
           {
                     unset($_SESSION['carrito']);
